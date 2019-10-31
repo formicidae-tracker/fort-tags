@@ -38,6 +38,33 @@ make
 
 ## How to use it with other CMake Project
 
+Simply add to you CMakeLists.txt:
+
+``` cmake
+include(FetchContent)
+FetchContent_Declare(fort-tags
+                     GIT_REPOSITORY https://github.com/formicidae-tracker/fort-tags.git
+                     GIT_TAG        v1.0.0)
+FetchContent_GetProperties(fort-tags)
+if(NOT fort-tags_POPULATED)
+	FetchContent_Populate(fort-tags)
+	add_subdirectory(${fort-tags_SOURCE_DIR} ${fort-tags_BINARY_DIR})
+endif(NOT fort-tags_POPULATED)
+
+include_directories(${fort-tags_SOURCE_DIR}/include)
+
+add_executable(my-exec)
+
+target_link_libraries(my-exec fort-tags)
+```
+
+You can choose the exact version of `fort-tag` you want to use using a
+git commit or tag (here v1.0.0 in this example). By default, this
+snippet will add to the install targets the header and apriltag
+libraries. You can pass the option `EXCLUDE_FROM_ALL` to the
+`add_subdirectory` call to avoid this behavior, but note that your
+target will need this library to be present on the system if you
+install it.
 
 
 ## Versioning
