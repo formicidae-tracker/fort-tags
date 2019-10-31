@@ -19,8 +19,8 @@ endif(NOT apriltag_POPULATED)
 
 ExternalProject_Add(apriltag-populated
 	SOURCE_DIR ${apriltag_SOURCE_DIR}
-	PATCH_COMMAND git apply ${PROJECT_SOURCE_DIR}/patch/apriltag.patch
-	CONFIGURE_COMMAND ""
+	PATCH_COMMAND git reset --hard
+	CONFIGURE_COMMAND git apply ${PROJECT_SOURCE_DIR}/patch/apriltag.patch
 	BUILD_COMMAND make
 	BUILD_IN_SOURCE 1
 	INSTALL_COMMAND PREFIX=<INSTALL_DIR> make install)
