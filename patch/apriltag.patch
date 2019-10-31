@@ -1,0 +1,28 @@
+diff --git a/Makefile b/Makefile
+index b368eff..39e3a90 100644
+--- a/Makefile
++++ b/Makefile
+@@ -18,9 +18,11 @@ all: $(TARGETS)
+ .PHONY: install
+ install: libapriltag.so
+ 	@chmod +x install.sh
++	@./install.sh $(PREFIX)/lib libapriltag.so.3.0.0
++	@./install.sh $(PREFIX)/lib libapriltag.so.3
+ 	@./install.sh $(PREFIX)/lib libapriltag.so
+ 	@./install.sh $(PREFIX)/include/apriltag $(APRILTAG_HEADERS)
+-	@ldconfig
++
+ 
+ libapriltag.a: $(APRILTAG_OBJS)
+ 	@echo "   [$@]"
+@@ -28,7 +30,9 @@ libapriltag.a: $(APRILTAG_OBJS)
+ 
+ libapriltag.so: $(APRILTAG_OBJS)
+ 	@echo "   [$@]"
+-	@$(CC) -fPIC -shared -o $@ $^
++	@$(CC) -fPIC -shared -Wl,-soname,libapriltag.so.3 -o libapriltag.so.3.0.0 $^
++	ln -s libapriltag.so.3.0.0 libapriltag.so.3
++	ln -s libapriltag.so.3 libapriltag.so
+ 
+ %.o: %.c
+ 	@echo "   $@"

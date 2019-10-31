@@ -1,0 +1,49 @@
+cmake_policy(SET CMP0048 NEW)
+
+project(fiducial-tags VERSION 0.1.0
+                      LANGUAGES C CXX)
+
+cmake_minimum_required(VERSION 3.11)
+
+include(FetchContent)
+
+FetchContent_Declare(apriltag
+                     GIT_REPOSITORY https://github.com/AprilRobotics/apriltag.git
+                     GIT_TAG        v3.0.0)
+
+include(ExternalProject)
+FetchContent_GetProperties(apriltag)
+if(NOT apriltag_POPULATED)
+	FetchContent_Populate(apriltag)
+
+##
+
+	#Patch apriltag as it is a bit sketchy on how it installs stuff
+
+
+
+
+#	add_subdirectory(${apriltag_SOURCE_DIR} ${apriltag_BINARY_DIR})
+endif(NOT apriltag_POPULATED)
+
+ExternalProject_Add(apriltag-populated
+	SOURCE_DIR ${apriltag_SOURCE_DIR}
+	PATCH_COMMAND git apply ${PROJECT_SOURCE_DIR}/patch/apriltag.patch
+	CONFIGURE_COMMAND ""
+	BUILD_COMMAND make
+	BUILD_IN_SOURCE 1
+	INSTALL_COMMAND PREFIX=<INSTALL_DIR> make install)
+
+ExternalProject_Get_Property(apriltag-populated INSTALL_DIR)
+
+find_package(Threads REQUIRED)
+set(APRILTAG_INCLUDE_DIRS ${INSTALL_DIR}/include)
+set(APRILTAG_LIBRARIES ${INSTALL_DIR}/lib/${CMAKE_SHARED_LIBRARY_PREFIX}apriltag${CMAKE_SHARED_LIBRARY_SUFFIX})
+
+install(FILES ${APRILTAG_LIBRARIES} ${APRILTAG_LIBRARIES}.3.0.0 ${APRILTAG_LIBRARIES}.3 DESTINATION lib)
+
+
+
+include_directories(${apriltag_SOURCE_DIR})
+
+add_subdirectory(src)
