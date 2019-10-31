@@ -52,4 +52,4 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## License
 
-This project is licensed under the LGPL License version 3 or later - see the [COPYING.LESSER](COPYING.LESSER) file for details
+This project is licensed under the BSD 2 Clause License - see the [LICENSE.md](LICENSE.md) file for details
