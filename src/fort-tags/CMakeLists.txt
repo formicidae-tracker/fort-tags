@@ -8,6 +8,8 @@ set(HDR_FILES tag36ARTag.h
 
 add_library(fort-tags SHARED ${SRC_FILES} ${HDR_FILES})
 
+add_dependencies(fort-tags apriltag-populated)
+
 target_link_libraries(fort-tags ${APRILTAG_LIBRARIES} Threads::Threads)
 
 set_target_properties(fort-tags PROPERTIES VERSION ${PROJECT_VERSION}
