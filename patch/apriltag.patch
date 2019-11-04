@@ -1,8 +1,13 @@
 diff --git a/Makefile b/Makefile
-index b368eff..39e3a90 100644
+index b368eff..e667ec9 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -18,9 +18,11 @@ all: $(TARGETS)
+@@ -13,14 +13,15 @@ TARGETS := libapriltag.a libapriltag.so
+ 
+ .PHONY: all
+ all: $(TARGETS)
+-	@$(MAKE) -C example all
+ 
  .PHONY: install
  install: libapriltag.so
  	@chmod +x install.sh
@@ -15,7 +20,7 @@ index b368eff..39e3a90 100644
  
  libapriltag.a: $(APRILTAG_OBJS)
  	@echo "   [$@]"
-@@ -28,7 +30,9 @@ libapriltag.a: $(APRILTAG_OBJS)
+@@ -28,7 +29,9 @@ libapriltag.a: $(APRILTAG_OBJS)
  
  libapriltag.so: $(APRILTAG_OBJS)
  	@echo "   [$@]"
@@ -26,3 +31,9 @@ index b368eff..39e3a90 100644
  
  %.o: %.c
  	@echo "   $@"
+@@ -37,4 +40,5 @@ libapriltag.so: $(APRILTAG_OBJS)
+ .PHONY: clean
+ clean:
+ 	@rm -rf *.o common/*.o $(TARGETS)
++	@rm libapriltag.so.3 libapriltag.so.3.0.0
+ 	@$(MAKE) -C example clean
