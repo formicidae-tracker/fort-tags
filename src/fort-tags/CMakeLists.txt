@@ -4,7 +4,8 @@ set(SRC_FILES tag36ARTag.c
               tag36h10.c)
 
 set(HDR_FILES tag36ARTag.h
-              tag36h10.h)
+              tag36h10.h
+              fort-tags.h)
 
 add_library(fort-tags SHARED ${SRC_FILES} ${HDR_FILES})
 
