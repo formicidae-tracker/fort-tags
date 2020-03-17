@@ -9,8 +9,8 @@
 #include <apriltag/tagCustom48h12.h>
 #include <apriltag/tagStandard41h12.h>
 #include <apriltag/tagStandard52h13.h>
-#include <fort-tags/tag36ARTag.h>
-#include <fort-tags/tag36h10.h>
+#include <fort/tags/tag36ARTag.h>
+#include <fort/tags/tag36h10.h>
 
 #ifdef __cplusplus
 namespace fort {

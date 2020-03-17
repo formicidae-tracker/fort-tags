@@ -13,9 +13,9 @@ add_dependencies(fort-tags apriltag-populated)
 
 target_link_libraries(fort-tags ${APRILTAG_LIBRARIES} Threads::Threads)
 
-set_target_properties(fort-tags PROPERTIES VERSION ${PROJECT_VERSION}
-                                           SOVERSION ${PROJECT_VERSION_MAJOR})
+set_target_properties(fort-tags PROPERTIES VERSION ${VERSION_API}
+                                           SOVERSION ${VERSION_ABI})
 
-install(TARGETS fort-tags DESTINATION lib)
+install(TARGETS fort-tags DESTINATION ${LIB_INSTALL_DIR})
 
-install(FILES ${HDR_FILES} DESTINATION include/fort-tags)
+install(FILES ${HDR_FILES} DESTINATION ${INCLUDE_INSTALL_DIR})
