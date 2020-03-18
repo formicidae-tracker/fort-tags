@@ -1,5 +1,5 @@
 diff --git a/Makefile b/Makefile
-index b368eff..e667ec9 100644
+index b368eff..d19aa31 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -13,14 +13,15 @@ TARGETS := libapriltag.a libapriltag.so
@@ -25,7 +25,7 @@ index b368eff..e667ec9 100644
  libapriltag.so: $(APRILTAG_OBJS)
  	@echo "   [$@]"
 -	@$(CC) -fPIC -shared -o $@ $^
-+	@$(CC) -fPIC -shared -Wl,-soname,libapriltag.so.3 -o libapriltag.so.3.0.0 $^
++	@$(CC) -fPIC -shared -lm -lpthread -Wl,-soname,libapriltag.so.3 -o libapriltag.so.3.0.0 $^
 +	ln -s libapriltag.so.3.0.0 libapriltag.so.3
 +	ln -s libapriltag.so.3 libapriltag.so
  
