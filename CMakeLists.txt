@@ -31,7 +31,7 @@ ExternalProject_Add(apriltag-populated
 	CONFIGURE_COMMAND git apply ${PROJECT_SOURCE_DIR}/patch/apriltag.patch
 	BUILD_COMMAND make
 	BUILD_IN_SOURCE 1
-	INSTALL_COMMAND PREFIX=<INSTALL_DIR> make install)
+	INSTALL_COMMAND make PREFIX=<INSTALL_DIR> install)
 
 ExternalProject_Get_Property(apriltag-populated INSTALL_DIR)
 
