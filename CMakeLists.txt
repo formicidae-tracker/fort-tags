@@ -1,6 +1,6 @@
 cmake_policy(SET CMP0048 NEW)
 
-project(fort-tags VERSION 1.2.2
+project(fort-tags VERSION 1.2.3
                   LANGUAGES C CXX)
 
 cmake_minimum_required(VERSION 3.11)
