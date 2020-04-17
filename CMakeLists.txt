@@ -25,14 +25,22 @@ if(NOT apriltag_POPULATED)
 	FetchContent_Populate(apriltag)
 endif(NOT apriltag_POPULATED)
 
-ExternalProject_Add(apriltag-populated
-	SOURCE_DIR ${apriltag_SOURCE_DIR}
-	PATCH_COMMAND git reset --hard
-	CONFIGURE_COMMAND git apply ${PROJECT_SOURCE_DIR}/patch/apriltag.patch
-	BUILD_COMMAND make
-	BUILD_IN_SOURCE 1
-	INSTALL_COMMAND make PREFIX=<INSTALL_DIR> install)
-
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+	ExternalProject_Add(apriltag-populated
+	                    SOURCE_DIR ${apriltag_SOURCE_DIR}
+	                    PATCH_COMMAND git reset --hard && git apply ${PROJECT_SOURCE_DIR}/patch/apriltag.patch && git apply ${PROJECT_SOURCE_DIR}/patch/noopt.patch
+	                    CONFIGURE_COMMAND echo "configured"
+	                    BUILD_COMMAND make
+	                    BUILD_IN_SOURCE 1
+	                    INSTALL_COMMAND make PREFIX=<INSTALL_DIR> install)
+else(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+	ExternalProject_Add(apriltag-populated
+	                    SOURCE_DIR ${apriltag_SOURCE_DIR}
+	                    PATCH_COMMAND git reset --hard && git clean -dxf && git apply ${PROJECT_SOURCE_DIR}/patch/noopt.patch
+	                    CONFIGURE_COMMAND cmake -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DCMAKE_BUILD_TYPE=Release
+	                    BUILD_IN_SOURCE 1
+	                    )
+endif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 ExternalProject_Get_Property(apriltag-populated INSTALL_DIR)
 
 find_package(Threads REQUIRED)

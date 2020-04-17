@@ -24,12 +24,9 @@
 
 #include <stdlib.h>
 #include <apriltag/apriltag.h>
+#include <apriltag/noopt.h>
 
-apriltag_family_t
-#ifndef _MSC_VER
-__attribute__((optimize("O0")))
-#endif
-*tag36ARTag_create()
+apriltag_family_t apriltag_noopt *tag36ARTag_create()
 {
 	apriltag_family_t *tf = calloc(1,sizeof(apriltag_family_t));
 	tf->name = strdup("tag36ARTag");

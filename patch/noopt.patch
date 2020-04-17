@@ -1,0 +1,137 @@
+diff --git a/noopt.h b/noopt.h
+new file mode 100644
+index 0000000..3985738
+--- /dev/null
++++ b/noopt.h
+@@ -0,0 +1,11 @@
++#ifndef APRILTAG_NOOPT
++#define APRILTAG_NOOPT
++
++#ifdef __clang__
++#define apriltag_noopt __attribute__((optnone))
++#else
++#define apriltag_noopt __attribute__((optimize("O0")))
++#endif
++
++
++#endif //APRILTAG_NOOPT
+diff --git a/tag16h5.c b/tag16h5.c
+index 3680cfc..51ce5c1 100644
+--- a/tag16h5.c
++++ b/tag16h5.c
+@@ -28,7 +28,9 @@ either expressed or implied, of the Regents of The University of Michigan.
+ #include <stdlib.h>
+ #include "apriltag.h"
+ 
+-apriltag_family_t __attribute__((optimize("O0"))) *tag16h5_create()
++#include "noopt.h"
++
++apriltag_family_t apriltag_noopt *tag16h5_create()
+ {
+    apriltag_family_t *tf = calloc(1, sizeof(apriltag_family_t));
+    tf->name = strdup("tag16h5");
+diff --git a/tag25h9.c b/tag25h9.c
+index 1a03cd9..ea3127e 100644
+--- a/tag25h9.c
++++ b/tag25h9.c
+@@ -28,7 +28,9 @@ either expressed or implied, of the Regents of The University of Michigan.
+ #include <stdlib.h>
+ #include "apriltag.h"
+ 
+-apriltag_family_t __attribute__((optimize("O0"))) *tag25h9_create()
++#include "noopt.h"
++
++apriltag_family_t apriltag_noopt *tag25h9_create()
+ {
+    apriltag_family_t *tf = calloc(1, sizeof(apriltag_family_t));
+    tf->name = strdup("tag25h9");
+diff --git a/tag36h11.c b/tag36h11.c
+index 51e16d8..0c7afc7 100644
+--- a/tag36h11.c
++++ b/tag36h11.c
+@@ -28,7 +28,9 @@ either expressed or implied, of the Regents of The University of Michigan.
+ #include <stdlib.h>
+ #include "apriltag.h"
+ 
+-apriltag_family_t __attribute__((optimize("O0"))) *tag36h11_create()
++#include "noopt.h"
++
++apriltag_family_t apriltag_noopt *tag36h11_create()
+ {
+    apriltag_family_t *tf = calloc(1, sizeof(apriltag_family_t));
+    tf->name = strdup("tag36h11");
+diff --git a/tagCircle21h7.c b/tagCircle21h7.c
+index 56f8690..723e81a 100644
+--- a/tagCircle21h7.c
++++ b/tagCircle21h7.c
+@@ -28,7 +28,9 @@ either expressed or implied, of the Regents of The University of Michigan.
+ #include <stdlib.h>
+ #include "apriltag.h"
+ 
+-apriltag_family_t __attribute__((optimize("O0"))) *tagCircle21h7_create()
++#include "noopt.h"
++
++apriltag_family_t apriltag_noopt *tagCircle21h7_create()
+ {
+    apriltag_family_t *tf = calloc(1, sizeof(apriltag_family_t));
+    tf->name = strdup("tagCircle21h7");
+diff --git a/tagCircle49h12.c b/tagCircle49h12.c
+index c9b2cdd..a2b446e 100644
+--- a/tagCircle49h12.c
++++ b/tagCircle49h12.c
+@@ -28,7 +28,9 @@ either expressed or implied, of the Regents of The University of Michigan.
+ #include <stdlib.h>
+ #include "apriltag.h"
+ 
+-apriltag_family_t __attribute__((optimize("O0"))) *tagCircle49h12_create()
++#include "noopt.h"
++
++apriltag_family_t apriltag_noopt *tagCircle49h12_create()
+ {
+    apriltag_family_t *tf = calloc(1, sizeof(apriltag_family_t));
+    tf->name = strdup("tagCircle49h12");
+diff --git a/tagCustom48h12.c b/tagCustom48h12.c
+index ce36304..a8f0884 100644
+--- a/tagCustom48h12.c
++++ b/tagCustom48h12.c
+@@ -28,7 +28,9 @@ either expressed or implied, of the Regents of The University of Michigan.
+ #include <stdlib.h>
+ #include "apriltag.h"
+ 
+-apriltag_family_t __attribute__((optimize("O0"))) *tagCustom48h12_create()
++#include "noopt.h"
++
++apriltag_family_t apriltag_noopt *tagCustom48h12_create()
+ {
+    apriltag_family_t *tf = calloc(1, sizeof(apriltag_family_t));
+    tf->name = strdup("tagCustom48h12");
+diff --git a/tagStandard41h12.c b/tagStandard41h12.c
+index 4e1ce97..d5e6a6f 100644
+--- a/tagStandard41h12.c
++++ b/tagStandard41h12.c
+@@ -28,7 +28,9 @@ either expressed or implied, of the Regents of The University of Michigan.
+ #include <stdlib.h>
+ #include "apriltag.h"
+ 
+-apriltag_family_t __attribute__((optimize("O0"))) *tagStandard41h12_create()
++#include "noopt.h"
++
++apriltag_family_t apriltag_noopt *tagStandard41h12_create()
+ {
+    apriltag_family_t *tf = calloc(1, sizeof(apriltag_family_t));
+    tf->name = strdup("tagStandard41h12");
+diff --git a/tagStandard52h13.c b/tagStandard52h13.c
+index 34ddf1c..11ac85b 100644
+--- a/tagStandard52h13.c
++++ b/tagStandard52h13.c
+@@ -28,7 +28,9 @@ either expressed or implied, of the Regents of The University of Michigan.
+ #include <stdlib.h>
+ #include "apriltag.h"
+ 
+-apriltag_family_t __attribute__((optimize("O0"))) *tagStandard52h13_create()
++#include "noopt.h"
++
++apriltag_family_t apriltag_noopt *tagStandard52h13_create()
+ {
+    apriltag_family_t *tf = calloc(1, sizeof(apriltag_family_t));
+    tf->name = strdup("tagStandard52h13");
