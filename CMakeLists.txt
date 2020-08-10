@@ -1,6 +1,6 @@
 cmake_policy(SET CMP0048 NEW)
 
-project(fort-tags VERSION 1.2.3
+project(fort-tags VERSION 1.3.0
                   LANGUAGES C CXX)
 
 cmake_minimum_required(VERSION 3.11)
@@ -16,8 +16,8 @@ endif(${PROJECT_VERSION_MAJOR} EQUAL 0)
 include(FetchContent)
 
 FetchContent_Declare(apriltag
-                     GIT_REPOSITORY https://github.com/AprilRobotics/apriltag.git
-                     GIT_TAG        v3.0.0)
+                     GIT_REPOSITORY https://github.com/formicidae-tracker/apriltag.git
+                     GIT_TAG        fort/3.1.2)
 
 include(ExternalProject)
 FetchContent_GetProperties(apriltag)
@@ -28,7 +28,7 @@ endif(NOT apriltag_POPULATED)
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	ExternalProject_Add(apriltag-populated
 	                    SOURCE_DIR ${apriltag_SOURCE_DIR}
-	                    PATCH_COMMAND git reset --hard && git apply ${PROJECT_SOURCE_DIR}/patch/apriltag.patch && git apply ${PROJECT_SOURCE_DIR}/patch/noopt.patch
+	                    PATCH_COMMAND git reset --hard
 	                    CONFIGURE_COMMAND echo "configured"
 	                    BUILD_COMMAND make
 	                    BUILD_IN_SOURCE 1
@@ -36,7 +36,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 else(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	ExternalProject_Add(apriltag-populated
 	                    SOURCE_DIR ${apriltag_SOURCE_DIR}
-	                    PATCH_COMMAND git reset --hard && git clean -dxf && git apply ${PROJECT_SOURCE_DIR}/patch/noopt.patch
+	                    PATCH_COMMAND git reset --hard
 	                    CONFIGURE_COMMAND cmake -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DCMAKE_BUILD_TYPE=Release
 	                    BUILD_IN_SOURCE 1
 	                    )
@@ -66,11 +66,11 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/FortTagsConfig.cmake
 
 set(APRILTAG_INCLUDE_DIR ${INSTALL_DIR}/include)
 set(APRILTAG_INCLUDE_DIRS ${APRILTAG_INCLUDE_DIR})
-set(APRILTAG_INCLUDE_DIRS ${APRILTAG_INCLUDE_DIR} PARENT_SCOPE)
+set(APRILTAG_STATIC_LIBRARY ${INSTALL_DIR}/lib/libapriltag.a)
+add_custom_target(apriltag-static-lib ALL
+                                      COMMAND "true"
+                                      BYPRODUCTS ${APRILTAG_STATIC_LIBRARY})
 
-set(APRILTAG_LIBRARIES ${INSTALL_DIR}/lib/${CMAKE_SHARED_LIBRARY_PREFIX}apriltag${CMAKE_SHARED_LIBRARY_SUFFIX})
-
-install(FILES ${APRILTAG_LIBRARIES} ${APRILTAG_LIBRARIES}.3.0.0 ${APRILTAG_LIBRARIES}.3 DESTINATION lib)
 install(DIRECTORY ${APRILTAG_INCLUDE_DIR}/apriltag DESTINATION include)
 
 

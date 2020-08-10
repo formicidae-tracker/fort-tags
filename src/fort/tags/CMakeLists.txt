@@ -11,7 +11,10 @@ add_library(fort-tags SHARED ${SRC_FILES} ${HDR_FILES})
 
 add_dependencies(fort-tags apriltag-populated)
 
-target_link_libraries(fort-tags ${APRILTAG_LIBRARIES} Threads::Threads)
+target_link_libraries(fort-tags ${APRILTAG_LIBRARIES}
+                                Threads::Threads
+                                "-Wl,--whole-archive ${APRILTAG_STATIC_LIBRARY} -Wl,--no-whole-archive"
+                                )
 
 set_target_properties(fort-tags PROPERTIES VERSION ${VERSION_API}
                                            SOVERSION ${VERSION_ABI})

@@ -24,9 +24,8 @@
 
 #include <stdlib.h>
 #include <apriltag/apriltag.h>
-#include <apriltag/noopt.h>
 
-apriltag_family_t apriltag_noopt *tag36ARTag_create()
+apriltag_family_t *tag36ARTag_create()
 {
 	apriltag_family_t *tf = calloc(1,sizeof(apriltag_family_t));
 	tf->name = strdup("tag36ARTag");
