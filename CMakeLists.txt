@@ -66,6 +66,10 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/FortTagsConfig.cmake
 
 set(APRILTAG_INCLUDE_DIR ${INSTALL_DIR}/include)
 set(APRILTAG_INCLUDE_DIRS ${APRILTAG_INCLUDE_DIR})
+get_directory_property(PARENT_DIR PARENT_DIRECTORY)
+if(PARENT_DIR)
+	set(APRILTAG_INCLUDE_DIRS ${APRILTAG_INCLUDE_DIR} PARENT_SCOPE)
+endif(PARENT_DIR)
 set(APRILTAG_STATIC_LIBRARY ${INSTALL_DIR}/lib/libapriltag.a)
 add_custom_target(apriltag-static-lib ALL
                                       COMMAND "true"
