@@ -1,4 +1,4 @@
-include_directories(${APRILTAG_INCLUDE_DIRS})
+include_directories(${apriltag_SOURCE_DIR})
 
 set(SRC_FILES tag36ARTag.c
               tag36h10.c)
@@ -9,11 +9,8 @@ set(HDR_FILES tag36ARTag.h
 
 add_library(fort-tags SHARED ${SRC_FILES} ${HDR_FILES})
 
-add_dependencies(fort-tags apriltag-populated)
-
 target_link_libraries(fort-tags ${APRILTAG_LIBRARIES}
-                                Threads::Threads
-                                "-Wl,--whole-archive ${APRILTAG_STATIC_LIBRARY} -Wl,--no-whole-archive"
+                                "-L${apriltag_BINARY_DIR} -Wl,--whole-archive -lapriltag -Wl,--no-whole-archive"
                                 )
 
 set_target_properties(fort-tags PROPERTIES VERSION ${VERSION_API}
