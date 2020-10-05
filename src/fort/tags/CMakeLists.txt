@@ -7,7 +7,10 @@ set(HDR_FILES tag36ARTag.h
               tag36h10.h
               fort-tags.h)
 
+
 add_library(fort-tags SHARED ${SRC_FILES} ${HDR_FILES})
+
+add_dependencies(fort-tags apriltag)
 
 set(APRILTAG_LINK_FLAGS )
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
