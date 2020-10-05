@@ -25,6 +25,7 @@ if(NOT apriltag_POPULATED)
 	add_subdirectory(${apriltag_SOURCE_DIR} ${apriltag_BINARY_DIR})
 endif(NOT apriltag_POPULATED)
 
+
 set(INCLUDE_INSTALL_DIR include/fort/tags)
 set(LIB_INSTALL_DIR lib )
 

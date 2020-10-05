@@ -1,4 +1,4 @@
-include_directories(${apriltag_SOURCE_DIR})
+include_directories(${apriltag_SOURCE_DIR}/include)
 
 set(SRC_FILES tag36ARTag.c
               tag36h10.c)
