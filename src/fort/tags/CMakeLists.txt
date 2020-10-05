@@ -9,8 +9,17 @@ set(HDR_FILES tag36ARTag.h
 
 add_library(fort-tags SHARED ${SRC_FILES} ${HDR_FILES})
 
-target_link_libraries(fort-tags ${APRILTAG_LIBRARIES}
-                                "-L${apriltag_BINARY_DIR} -Wl,--whole-archive -lapriltag -Wl,--no-whole-archive"
+set(APRILTAG_LINK_FLAGS )
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+	set(APRILTAG_LINK_FLAGS "-L${apriltag_BINARY_DIR} -Wl,--whole-archive -lapriltag -Wl,--no-whole-archive")
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+	set(APRILTAG_LINK_FLAGS "-L${apriltag_BINARY_DIR} -Wl,-force-load,libapriltag.a")
+else(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+	message(FATAL_ERROR "Unsupported OS ${CMAKE_SYSTEM_NAME}")
+endif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+
+
+target_link_libraries(fort-tags ${APRILTAG_LINK_FLAGS}
                                 )
 
 set_target_properties(fort-tags PROPERTIES VERSION ${VERSION_API}
