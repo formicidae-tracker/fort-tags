@@ -1,11 +1,13 @@
 include_directories(${apriltag_SOURCE_DIR}/include)
 
 set(SRC_FILES tag36ARTag.c
-              tag36h10.c)
+              tag36h10.c
+              options.cpp)
 
 set(HDR_FILES tag36ARTag.h
               tag36h10.h
-              fort-tags.h)
+              fort-tags.h
+              options.hpp)
 
 
 add_library(fort-tags SHARED ${SRC_FILES} ${HDR_FILES})
