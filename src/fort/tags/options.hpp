@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fort-tags.h"
+#include "fort-tags.hpp"
 
 namespace fort {
 namespace tags {

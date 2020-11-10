@@ -1,41 +1,43 @@
 #pragma once
 
 #include <apriltag/apriltag.h>
-#include <apriltag/tag16h5.h>
-#include <apriltag/tag25h9.h>
-#include <apriltag/tag36h11.h>
-#include <apriltag/tagCircle21h7.h>
-#include <apriltag/tagCircle49h12.h>
-#include <apriltag/tagCustom48h12.h>
-#include <apriltag/tagStandard41h12.h>
-#include <apriltag/tagStandard52h13.h>
-#include <fort/tags/tag36ARTag.h>
-#include <fort/tags/tag36h10.h>
 
 #ifdef __cplusplus
-namespace fort {
-namespace tags {
-enum class Family {
+extern "C" {
+#endif
 
-#else //__cplusplus
-typedef enum FortTagFamily {
-#endif //__cplusplus
- Tag36h11=0,
- Tag36h10,
- Tag36ARTag,
- Tag16h5,
- Tag25h9,
- Circle21h7,
- Circle49h12,
- Custom48h12,
- Standard41h12,
- Standard52h13,
- Undefined
+typedef enum FortTagsFamily {
+	FortTags_Tag36h11=0,
+	FortTags_Tag36h10,
+	FortTags_Tag36ARTag,
+	FortTags_Tag16h5,
+	FortTags_Tag25h9,
+	FortTags_Circle21h7,
+	FortTags_Circle49h12,
+	FortTags_Custom48h12,
+	FortTags_Standard41h12,
+	FortTags_Standard52h13,
+	FortTags_Undefined
+} FortTagsFamily_e;
+
+
+typedef apriltag_family_t*(*FortTagsFamilyConstructor)();
+typedef void(*FortTagsFamilyDestructor)(apriltag_family_t*);
+
+typedef struct FortTagsFamilyInterface {
+	FortTagsFamilyConstructor Constructor;
+	FortTagsFamilyDestructor Destructor;
+} FortTagsFamilyInterface_t;
+
+FortTagsFamily_e FortTagsFindFamily(const char * familyName);
+
+const char * FortTagsGetFamilyName(FortTagsFamily_e family);
+
+int FortTagsGetFamily(FortTagsFamilyInterface_t * interface,FortTagsFamily_e family);
+
+int FortTagsGetFamilyFromName(FortTagsFamilyInterface_t * interface,const char * familyName);
+
 
 #ifdef __cplusplus
-};
-} // namespace tags
-} // namespace fort
-#else //__cplusplus
-} FortTagFamily_e;
-#endif //__cplusplus
+} // extern C
+#endif
