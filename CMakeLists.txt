@@ -15,17 +15,10 @@ else(${PROJECT_VERSION_MAJOR} EQUAL 0)
 endif(${PROJECT_VERSION_MAJOR} EQUAL 0)
 
 
-include(FetchContent)
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+include(FetchApriltag)
 
-FetchContent_Declare(apriltag
-                     GIT_REPOSITORY https://github.com/formicidae-tracker/apriltag.git
-                     GIT_TAG        fort/3.1.3)
-
-FetchContent_GetProperties(apriltag)
-if(NOT apriltag_POPULATED)
-	FetchContent_Populate(apriltag)
-	add_subdirectory(${apriltag_SOURCE_DIR} ${apriltag_BINARY_DIR})
-endif(NOT apriltag_POPULATED)
+fetch_apriltag(VERSION fort/3.1.3)
 
 
 set(INCLUDE_INSTALL_DIR include/fort/tags)
