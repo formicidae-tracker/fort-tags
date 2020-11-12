@@ -16,7 +16,7 @@ ApriltagOptions::ApriltagOptions()
 	, QuadDeglitch(false) {
 }
 
-void ApriltagOptions::SetUpDetector(apriltag_detector_t * d) {
+void ApriltagOptions::SetUpDetector(apriltag_detector_t * d) const {
 	d->nthreads = 1;
 	d->quad_decimate = QuadDecimate;
 	d->quad_sigma = QuadSigma;

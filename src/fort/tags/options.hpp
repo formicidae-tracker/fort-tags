@@ -22,7 +22,7 @@ public:
 
 	ApriltagOptions();
 
-	void SetUpDetector(apriltag_detector_t * detector);
+	void SetUpDetector(apriltag_detector_t * detector) const;
 
 };
 
