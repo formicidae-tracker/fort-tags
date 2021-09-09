@@ -1,6 +1,7 @@
 #include "fort-tags.hpp"
 
 #include <map>
+#include <stdexcept>
 
 #include <apriltag/tag16h5.h>
 #include <apriltag/tag25h9.h>
