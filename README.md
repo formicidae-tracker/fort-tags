@@ -1,9 +1,14 @@
-# Apriltag fiducial tag for the FORmicidae Tracker project
+# FORmicidae Tracker (FORT) : Legacy Fiducial Marker Support
 
-This repository holds the custom tag families used by the FORmicidae
-Tracker project. It also points to the exact version of
+[![DOI](https://zenodo.org/badge/218741181.svg)](https://zenodo.org/doi/10.5281/zenodo.10019059)
+
+
+The [FORmicidae Tracker (FORT)](https://formicidae-tracker.github.io) is an advanced online tracking system designed specifically for studying social insects, particularly ants and bees, FORT utilizes fiducial markers for extended individual tracking. Its key features include real-time online tracking and a modular design architecture that supports distributed processing. The project's current repositories encompass comprehensive hardware blueprints, technical documentation, and associated firmware and software for online tracking and offline data analysis.
+
+This repository holds the custom tag families used by the FORT project.
+It also points to the exact version of
 [apriltag](https://github.com/AprilRobotics/apriltag) used in
-throughout the project. This is mainly to be used by CMake targets.
+throughout FORT. This is mainly desgned to be used by CMake targets.
 
 ## Getting Started
 
