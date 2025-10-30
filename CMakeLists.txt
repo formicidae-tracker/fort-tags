@@ -25,17 +25,21 @@
 
 cmake_policy(SET CMP0048 NEW)
 
+cmake_minimum_required(VERSION 3.11)
+
 project(
 	fort-tags
-	VERSION 1.4.1
+	VERSION 1.4.3
 	LANGUAGES C CXX
 )
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+	add_definitions(-Wall -Wpedantic -Werror)
+endif()
 
 if(PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	set(FORT_TAGS_MAIN 1)
 endif(PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-
-cmake_minimum_required(VERSION 3.11)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED 1)
@@ -47,10 +51,14 @@ else(${PROJECT_VERSION_MAJOR} EQUAL 0)
 	set(VERSION_ABI ${PROJECT_VERSION_MAJOR})
 endif(${PROJECT_VERSION_MAJOR} EQUAL 0)
 
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-include(FetchApriltag)
-
-fetch_apriltag(VERSION fort/3.1.3)
+include(FetchContent)
+FetchContent_Declare(
+	apriltag
+	GIT_REPOSITORY https://github.com/formicidae-tracker/apriltag
+	GIT_TAG fort/3.1.3-1
+	SOURCE_DIR ${FETCHCONTENT_BASE_DIR}/src/apriltag
+)
+FetchContent_MakeAvailable(apriltag)
 
 set(INCLUDE_INSTALL_DIR include/fort/tags)
 set(LIB_INSTALL_DIR lib)
